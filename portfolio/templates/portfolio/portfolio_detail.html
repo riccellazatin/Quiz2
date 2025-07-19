@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {# portfolio/templates/portfolio/portfolio_detail.html #}
+    {% extends 'portfolio/base.html' %}
+
+    {% block title %}Portfolio Detail - {{ portfolio.user.first_name }} {{ portfolio.user.last_name }}{% endblock %}
+
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+
+{% block content %}
+<a href="{% url 'portfolio:applicant_list' %}" class="btn btn-secondary btn-sm mb-3">Back to Applicants</a>
+
+<h2 class="mb-3">Applicant: {{ portfolio.user.first_name }} {{ portfolio.user.last_name }}</h2>
+<p><strong>Email:</strong> {{ portfolio.user.email }}</p>
+
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h4>Portfolio Details</h4>
+    </div>
+    <div class="card-body">
+        <p><strong>Title:</strong> {{ portfolio.portfolio_title }}</p>
+        <p><strong>Description:</strong> {{ portfolio.portfolio_description }}</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-info text-white">
+        <h4>Project Details</h4>
+    </div>
+    <div class="card-body">
+        {% if portfolio.project %}
+        <p><strong>Project Name:</strong> {{ portfolio.project.project_name }}</p>
+        <p><strong>Project Description:</strong> {{ portfolio.project.project_description }}</p>
+        <p><strong>Created At:</strong> {{ portfolio.project.created_at|date:"M d, Y H:i" }}</p>
+        <p><strong>Updated At:</strong> {{ portfolio.project.updated_at|date:"M d, Y H:i" }}</p>
+        {% else %}
+        <p>No project assigned to this portfolio.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

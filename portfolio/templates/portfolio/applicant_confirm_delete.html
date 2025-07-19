@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    {# portfolio/templates/portfolio/applicant_confirm_delete.html #}
+    {% extends 'portfolio/base.html' %}
+
+    {% block title %}Confirm Delete{% endblock %}
+</head>
+<body>
+
+{% block content %}
+<div class="alert alert-warning" role="alert">
+    <h4 class="alert-heading">Confirm Deletion</h4>
+    <p>Are you sure you want to delete the applicant <strong>{{ object.first_name }} {{ object.last_name }} ({{ object.username }})</strong>?</p>
+    <p>This will permanently remove the user and their associated portfolio and project data.</p>
+    <hr>
+    <form method="post">
+        {% csrf_token %} {# Required for all Django forms #}
+        <button type="submit" class="btn btn-danger me-2">Yes, Delete</button>
+        <a href="{% url 'portfolio:applicant_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
+
+</body>
+</html>

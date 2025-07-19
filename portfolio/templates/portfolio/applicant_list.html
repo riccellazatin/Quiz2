@@ -1,0 +1,47 @@
+{# portfolio/templates/portfolio/applicant_list.html #}
+{% extends 'portfolio/base.html' %} {# Extend the base template #}
+
+{% block title %}Applicant List{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Applicant List</title>
+</head>
+<body>
+
+{% block content %}
+<h1 class="mb-4">Applicants for {{ position }} Position</h1>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for applicant in applicants %}
+        <tr>
+            <td>{{ applicant.first_name }}</td>
+            <td>{{ applicant.last_name }}</td>
+            <td>{{ applicant.email }}</td>
+            <td>
+                <a href="{% url 'portfolio:portfolio_detail' username=applicant.username %}" class="btn btn-primary btn-sm me-2">Go</a>
+                <a href="{% url 'portfolio:applicant_delete' username=applicant.username %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center">No applicants found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+</body>
+</html>
